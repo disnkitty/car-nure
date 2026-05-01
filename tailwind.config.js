@@ -5,7 +5,7 @@ export default {
     extend: {
       colors: {
         cinder: '#1A181C',
-        chartreuse: '#EAFF00',
+        chartreuse: '#22C55E',
         mist: '#939393',
         concrete: '#F2F2F2',
         orange: '#FDA400',
