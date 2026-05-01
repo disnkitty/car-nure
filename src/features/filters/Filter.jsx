@@ -4,7 +4,7 @@ function Filter() {
   return (
     <button
       type="button"
-      aria-label="Filter meeting rooms"
+      aria-label="Filter cars"
       className="inline-flex shrink-0 items-center justify-center rounded-full border-0 bg-transparent p-0 text-cinder"
     >
       <IconFilter className="shrink-0" />

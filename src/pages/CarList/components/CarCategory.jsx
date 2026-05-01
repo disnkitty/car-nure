@@ -1,7 +1,6 @@
-import AllMeetingRooms from '@/features/rooms/components/AllMeetingRooms';
-import RecommendedRooms from '@/features/rooms/components/RecommendedRooms';
 import Button from '@/ui/Button';
-function RoomCategory({ name, isActive, onSelect }) {
+
+function CarCategory({ name, isActive, onSelect }) {
   return (
     <Button
       type="button"
@@ -15,4 +14,4 @@ function RoomCategory({ name, isActive, onSelect }) {
   );
 }
 
-export default RoomCategory;
+export default CarCategory;

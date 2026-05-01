@@ -1,10 +1,10 @@
-import RoomCard from './RoomCard';
-import { useRooms } from '@/context/RoomsContext';
+import CarCard from './CarCard';
+import { useCars } from '@/context/CarsContext';
 import { useRef } from 'react';
 import IconArrow from '@/ui/IconArrow';
 
-function RecommendedRooms() {
-  const { rooms } = useRooms();
+function RecommendedCars() {
+  const { cars } = useCars();
   const scrollRef = useRef(null);
 
   const scrollLeft = () => {
@@ -19,9 +19,8 @@ function RecommendedRooms() {
     <section className="flex flex-col gap-4">
       <div className="flex items-center justify-between gap-4">
         <h2 className="text-base font-semibold leading-none text-cinder">
-          Recommended rooms
+          Recommended cars
         </h2>
-
         <div className="flex items-center gap-2">
           <button
             type="button"
@@ -45,17 +44,16 @@ function RecommendedRooms() {
           </button>
         </div>
       </div>
-
       <div
         ref={scrollRef}
         className="-mx-4 flex gap-3 overflow-x-auto px-4 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
-        {rooms.slice(5, 9).map((obj) => (
-          <RoomCard key={obj.id} obj={obj} />
+        {cars.slice(5, 9).map((obj) => (
+          <CarCard key={obj.id} obj={obj} />
         ))}
       </div>
     </section>
   );
 }
 
-export default RecommendedRooms;
+export default RecommendedCars;

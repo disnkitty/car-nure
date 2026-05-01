@@ -1,42 +1,36 @@
-import { useRooms } from '@/context/RoomsContext';
+import { useCars } from '@/context/CarsContext';
 import ChooseDates from '@/pages/ChooseDates/ChooseDates';
 import ChooseTime from '@/pages/ChooseTime/ChooseTime';
 import Review from '@/pages/Review/Review';
 import SuccessState from '@/pages/SuccessState/SuccessState';
 import { useSearchParams } from 'react-router-dom';
-
 import Content from './components/Content';
 import Footer from './components/Footer';
 import { useParams } from 'react-router-dom';
 import { useState } from 'react';
-function RoomDetails() {
 
-  
-  const { rooms } = useRooms();
+function CarDetails() {
+  const { cars } = useCars();
   const { id } = useParams();
   const [searchParams] = useSearchParams();
-  const [modal, setModal] = useState(
-    () => searchParams.get('startModal') ?? null, 
-  );
+  const [modal, setModal] = useState(() => searchParams.get('startModal') ?? null);
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedTime, setSelectedTime] = useState(null);
 
-
-if (rooms.length === 0) {
+  if (cars.length === 0) {
     return <div>Loading...</div>;
   }
-const room = rooms.find((r) =>r.id.toString() === id);
 
+  const car = cars.find((item) => item.id.toString() === id);
+  if (!car) {
+    return <div>Loading...</div>;
+  }
 
-if (!room) {
-  return <div>Loading...</div>;
-}
   return (
-    
     <div className="relative flex min-h-screen flex-col bg-alabaster">
-      <Content obj={room} />
+      <Content obj={car} />
       <Footer
-        obj={room}
+        obj={car}
         onBookClick={() => setModal('date')}
         onBookSwipe={() => setModal(null)}
       />
@@ -53,7 +47,6 @@ if (!room) {
           </div>
         </div>
       )}
-
       {modal === 'time' && (
         <div className="fixed inset-0 z-50 bg-black/60">
           <div className="absolute bottom-0 left-0 right-0">
@@ -69,7 +62,6 @@ if (!room) {
           </div>
         </div>
       )}
-
       {modal === 'review' && (
         <div className="fixed inset-0 z-50 bg-black/60">
           <div className="absolute bottom-0 left-0 right-0">
@@ -79,16 +71,12 @@ if (!room) {
               onBookFreeNow={() => setModal('success')}
               onReviewClose={() => setModal(null)}
               onReviewArrow={() => setModal('time')}
-
-              onChangeDateClick={()=> setModal('date')}
-              onDetailsClick={()=> setModal(null)}
+              onChangeDateClick={() => setModal('date')}
+              onDetailsClick={() => setModal(null)}
             />
           </div>
         </div>
       )}
-
-      
-
       {modal === 'success' && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 px-4">
           <SuccessState onDone={() => setModal(null)} />
@@ -98,4 +86,4 @@ if (!room) {
   );
 }
 
-export default RoomDetails;
+export default CarDetails;

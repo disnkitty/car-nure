@@ -1,9 +1,9 @@
-import FullDetailRoom from '@/features/rooms/components/FullDetailRoom';
+import FullDetailCar from '@/features/cars/components/FullDetailCar';
 
 function Content({ obj }) {
   return (
     <div className="flex flex-col">
-      <FullDetailRoom obj={obj} />
+      <FullDetailCar obj={obj} />
     </div>
   );
 }

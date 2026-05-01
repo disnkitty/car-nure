@@ -30,7 +30,6 @@ export function useDragToClose(onClose, threshold = 80, sheetRef = null) {
       const currentY = ev.touches?.[0]?.clientY ?? ev.clientY;
       const delta = currentY - startY.current;
 
-      // Only allow dragging downward
       if (delta > 0) {
         sheet.style.transform = `translateY(${delta}px)`;
       }
@@ -46,13 +45,11 @@ export function useDragToClose(onClose, threshold = 80, sheetRef = null) {
       startY.current = null;
 
       if (delta > threshold) {
-        // Close the sheet
         sheet.style.transition = 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
         sheet.style.transform = `translateY(${window.innerHeight}px)`;
         if (closeTimeout.current) clearTimeout(closeTimeout.current);
         closeTimeout.current = setTimeout(onClose, 300);
       } else {
-        // Snap back
         resetTransform(sheet, true);
       }
 

@@ -1,8 +1,8 @@
 import { useRef } from 'react';
-import { useRooms } from '@/context/RoomsContext';
-import ReviewRoomCard from '@/features/rooms/components/ReviewRoomCard';
+import { useCars } from '@/context/CarsContext';
+import ReviewCarCard from '@/features/cars/components/ReviewCarCard';
 import Button from '@/ui/Button';
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import IconArrow from '@/ui/IconArrow';
 import IconCross from '@/ui/IconCross';
 import { useDragToClose } from '@/useDragToClose';
@@ -19,18 +19,18 @@ function Review({
   onChangeDateClick,
   onDetailsClick,
 }) {
-  const { rooms, loading, error } = useRooms();
+  const { cars, loading, error } = useCars();
   const { id } = useParams();
   const sheetRef = useRef(null);
   const dragHandle = useDragToClose(onReviewClose, 80, sheetRef);
 
   const handleBookFreeNow = async () => {
-    await saveBooking(room.id, selectedDate, selectedTime);
+    await saveBooking(car.id, selectedDate, selectedTime);
     if (!bookingError) {
       onBookFreeNow();
     }
   };
-  const room = rooms.find((r) => r.id === Number(id)) || rooms[0];
+  const car = cars.find((item) => item.id === Number(id)) || cars[0];
   const [isClosing, setIsClosing] = useState(false);
   const [bookingError, setBookingError] = useState(null);
 
@@ -41,20 +41,19 @@ function Review({
     }, 300);
   };
 
-  const saveBooking = async (roomId, date, time) => {
+  const saveBooking = async (carId, date, time) => {
     try {
       setBookingError(null);
       const bookingsRef = ref(database, 'bookings');
       const newBookingRef = push(bookingsRef);
       await set(newBookingRef, {
-        roomId,
+        carId,
         date,
         time,
         timestamp: new Date().toISOString(),
       });
-      console.log('Бронирование сохранено:', { roomId, date, time });
     } catch (error) {
-      console.error('Ошибка сохранения бронирования:', error);
+      setBookingError(error.message);
     }
   };
   const handleDetailsChange = () => {
@@ -77,10 +76,10 @@ function Review({
     );
   }
 
-  if (error || !room) {
+  if (error || !car) {
     return (
       <div className="flex justify-center items-center h-full">
-        Ошибка: {error || 'Комната не найдена'}
+        Error: {error || 'Car not found'}
       </div>
     );
   }
@@ -146,9 +145,8 @@ function Review({
         </div>
 
         <div className="flex-1 overflow-y-auto px-8">
-          <ReviewRoomCard
-            obj={room}
-            id={id}
+          <ReviewCarCard
+            obj={car}
             selectedDate={selectedDate}
             selectedTime={selectedTime}
             onChangeDateClick={handleDateChange}

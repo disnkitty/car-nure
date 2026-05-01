@@ -7,8 +7,8 @@ function SearchInput({ onSearch }) {
       <IconSearch className="shrink-0" />
       <input
         type="search"
-        name="room-search"
-        placeholder="Search meeting room…"
+        name="car-search"
+        placeholder="Search car…"
         className="min-w-0 flex-1 border-0 bg-transparent text-sm font-normal leading-[150%] text-cinder placeholder:text-mist focus:outline-none focus:ring-0"
         autoComplete="off"
         onChange={(e) => onSearch(e.target.value)}

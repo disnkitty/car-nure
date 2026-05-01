@@ -1,8 +1,8 @@
-import { roomFeatures } from '@/ui/roomFeatures';
+import { carFeatures } from '@/ui/carFeatures';
 import Button from '@/ui/Button';
 
-function RoomOffers({ obj }) {
-  const activeFeatures = roomFeatures.filter(({ key }) => {
+function CarOffers({ obj }) {
+  const activeFeatures = carFeatures.filter(({ key }) => {
     const val = obj[key];
     return val !== false && val !== undefined;
   });
@@ -10,7 +10,7 @@ function RoomOffers({ obj }) {
   return (
     <section className="flex flex-col gap-4 border-t border-concrete pt-4">
       <h2 className="text-base font-semibold leading-none text-cinder">
-        What this room offers
+        What this car offers
       </h2>
       <div className="flex flex-col gap-2">
         <div className="flex flex-wrap gap-2">
@@ -34,4 +34,4 @@ function RoomOffers({ obj }) {
   );
 }
 
-export default RoomOffers;
+export default CarOffers;
