@@ -1,8 +1,7 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import IconSuccess from '@/ui/IconSuccess';
 import Button from '@/ui/Button';
-import { useDragToClose } from '../../useDragToClose';
-import { useState } from 'react';
+import useDragToClose from '@/useDragToClose';
 
 function SuccessState({ onDone, onClose }) {
   const sheetRef = useRef(null);
@@ -27,12 +26,10 @@ function SuccessState({ onDone, onClose }) {
         }`}
       >
         <div
-    onPointerDown={dragHandle.onPointerDown}
-  onClick={handleSmoothClose}
+          onPointerDown={dragHandle.onPointerDown}
+          onClick={handleSmoothClose}
           className="flex cursor-grab touch-none flex-row justify-center gap-2 py-2 active:cursor-grabbing lg:hidden"
-        >
-       
-        </div>
+        ></div>
 
         <div className="flex-1 overflow-y-auto px-8 py-8 flex flex-col items-center justify-center gap-8">
           <div className="flex flex-col items-center justify-center gap-5">

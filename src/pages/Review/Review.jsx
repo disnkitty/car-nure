@@ -5,8 +5,8 @@ import Button from '@/ui/Button';
 import { useParams } from 'react-router-dom';
 import IconArrow from '@/ui/IconArrow';
 import IconCross from '@/ui/IconCross';
-import { useDragToClose } from '@/useDragToClose';
 import { useState } from 'react';
+import useDragToClose from '@/useDragToClose';
 import { ref, push, set } from 'firebase/database';
 import { database } from '@/firebase';
 
@@ -50,7 +50,7 @@ function Review({
         carId,
         date,
         time,
-        timestamp: new Date().toISOString(),
+        timestamp: new Date(date).toISOString(),
       });
     } catch (error) {
       setBookingError(error.message);
